@@ -4,7 +4,7 @@ import cv2 as cv
 import os
 
 def get_image(file_name):
-    path = "E:\\saved programs\\VS code\\sem-6_min-project\\static\\uploads\\"
+    path = 'static/uploaded_images/'
     img = cv.imread(os.path.join(path, file_name))
     # print(img)
     # img = img.astype(np.uint8)
@@ -182,5 +182,5 @@ def main_encrypt(number, file_name):
     # img_arkt = img_arkt.astype(np.uint8)
     # cv.imshow('img_arkt', img_arkt)
     # cv.waitKey(0)
-
-    cv.imwrite('encrypted image.jpg', img_arkt)
+    path = 'static/encrypted_images/'
+    cv.imwrite(path + file_name, img_arkt)

@@ -4,7 +4,7 @@ import os
 from werkzeug.utils import secure_filename
 from encrypt import main_encrypt 
 
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = 'static/uploaded_images/'
 app = Flask(__name__, template_folder='./Templates/')
 
 @app.route("/")
@@ -19,6 +19,7 @@ def allowed_file(filename):
 @app.route("/encrypt", methods=['GET', 'POST'])
 def encrypt_img():
     if request.method == 'POST':
+        flag = 0
         # print('in if')
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -38,7 +39,9 @@ def encrypt_img():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             main_encrypt(key, file.filename)
-            return render_template("home.html")
+            flag = 1
+            print(filename)
+            return render_template("encrypt_page.html", flag = flag, file_name = filename)
     return render_template("encrypt_page.html")
     # if request.method == 'POST':
     #     print("in if")
