@@ -1,24 +1,16 @@
 import numpy as np
-#from IPython.display import Image, display
 import cv2 as cv
 import os
 
 def get_image(file_name):
-    path = 'static/uploaded_images/'
-    img = cv.imread(os.path.join(path, file_name))
+    path = 'static/uploaded_images(encrypte)/'
+    img = cv.imread(os.path.join(path, file_name), cv.IMREAD_GRAYSCALE)
     # print(img)
     # img = img.astype(np.uint8)
     # cv.imshow('lamp', img)
     # cv.waitKey(0)
 
-    img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    # cv.imshow('lamp', img)
-    # cv.waitKey(0)
-
     img=cv.resize(img,(256,256))
-    # cv.imshow('lamp', img)
-    # cv.waitKey(0)
-    #print('\n',img.shape)
     return img
 
 # Image Encryption key
@@ -136,21 +128,20 @@ def add_round_key_transform(img_mct,roundKey):
     return img_arkt
 
 
-
-
 def main_encrypt(number, file_name):
 # if __name__ == '__main__':
+    # file_name = '2319856.jpg'
+    print(file_name)
     img = get_image(file_name)
     # cv.imshow('img', img)
     # cv.waitKey(0)
-
+    # number = '1234567891234567'
     #number = input('Enter a 16 digit key')
     if len(number) == 16:
         roundKey = get_array_key(number)
     else:
         print('Invalid Input')
         
-
     # Substitute Byte Transformation
     img_sbt=np.zeros((256,256),int)
     img_sbt=sub_byte_transform(img)
@@ -178,9 +169,26 @@ def main_encrypt(number, file_name):
     # Add Round Key Transformation
     img_arkt=np.zeros((256,256),int)
     img_arkt=add_round_key_transform(img_mct,roundKey)
-    # print(img_arkt)
-    # img_arkt = img_arkt.astype(np.uint8)
+    
+    img_arkt = img_arkt.astype(np.uint8)
     # cv.imshow('img_arkt', img_arkt)
     # cv.waitKey(0)
+    # print(img_arkt)
+    # cv.imshow('img_arkt', img_arkt)
+    # cv.waitKey(0)
+    
     path = 'static/encrypted_images/'
-    cv.imwrite(path + file_name, img_arkt)
+    file_name = file_name.split('.')
+    print(file_name)
+    f_name = file_name[0]+'.png'
+    print(f_name)
+    cv.imwrite(os.path.join(path + f_name), img_arkt)
+    return f_name
+
+    # img = cv.imread(path + file_name,0)
+
+    # print(img)
+    # data = im.fromarray(img_arkt)
+    # file_name = '2319856'
+    # data.save('static/encrypted_images/myphoto.png')
+    #cv.imwrite(path + file_name, img_arkt)

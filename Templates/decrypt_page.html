@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
-    <title>Encrypt </title>
+    <title>Decrypt </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbars/">
 
@@ -59,11 +59,11 @@
         <div>
           <div class="bg-light p-5 rounded">
             <div class="col-sm-8 mx-auto">
-                <img src='https://images.idgesg.net/images/article/2018/01/security_internet_network_encryption_privacy_padlock-100745987-large.jpg' class="rounded float-right" style="width:500px;height:300px;">
-                <h1>MiniProject Webpage</h1>
-                <p>This Encryption uses AES Encryption Algorithm </p>
-                {% if flag != 1 %}
-                <h4>Select a File to be encrypted</h4>
+              <img src='https://s3-us-west-2.amazonaws.com/a.techdemand.io/wp-content/uploads/2019/04/09092122/Data-Encryption-Descryption-1024x631.jpg' class="rounded float-right" style="width:500px;height:300px;">
+              <h1>MiniProject Webpage</h1>
+              <p>This Encryption uses AES Encryption Algorithm </p>
+              {% if flag != 1 %}
+                <h4>Select a File to be decrypted</h4>
                 <p>
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -75,15 +75,15 @@
                     {% endif %}
                     {% endwith %}
                 </p>
-              <form action="/encrypt" method="POST" enctype="multipart/form-data">
+              <form action="/decrypt" method="POST" enctype="multipart/form-data">
                 <input class="btn btn-primary" name="file" role="button" type="file" >
-                <h4>Enter a 16 digit key for Encryption</h4>
+                <h4>Enter a 16 digit key for Decryption</h4>
                 <input type="text" name="key" placeholder="Enter Key" class="border border-primary">
                 <input type="submit" value="upload">
               </form>
               {% endif %}
               {% if flag == 1 %}
-                <a href="/static/encrypted_images/{{file_name}}" download> 
+                <a href="/static/decrypted_images/{{file_name}}" download> 
                   <button type="button"  class="btn btn-primary">Download</button>
                 </a>
               {% endif %}
@@ -96,6 +96,7 @@
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
     <footer>
       <!-- Social buttons -->
       <ul class="list-unstyled list-inline text-center">
@@ -135,6 +136,6 @@
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
       -->
-      
+
   </body>
 </html>
