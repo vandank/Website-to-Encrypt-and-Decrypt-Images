@@ -129,9 +129,9 @@ def add_round_key_transform(img_mct,roundKey):
 
 
 def main_encrypt(number, file_name):
+    print('image data', f)
 # if __name__ == '__main__':
     # file_name = '2319856.jpg'
-    print(file_name)
     img = get_image(file_name)
     # cv.imshow('img', img)
     # cv.waitKey(0)
@@ -179,9 +179,9 @@ def main_encrypt(number, file_name):
     
     path = 'static/encrypted_images/'
     file_name = file_name.split('.')
-    print(file_name)
+    # print(file_name)
     f_name = file_name[0]+'.png'
-    print(f_name)
+    # print(f_name)
     cv.imwrite(os.path.join(path + f_name), img_arkt)
     return f_name
 

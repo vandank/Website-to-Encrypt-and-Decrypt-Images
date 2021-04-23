@@ -42,10 +42,10 @@ def encrypt_img():
             filename = secure_filename(file.filename)
             filename.replace(' ', '_')
             file.save(os.path.join(app.config['UPLOAD_FOLDER_en'], filename))
-            print('app=',filename)
+            # print('app=',filename)
             filename = main_encrypt(key, filename)
             flag = 1
-            print(filename)
+            # print(filename)
             return render_template("encrypt_page.html", flag = flag, file_name = filename)
 
     return render_template("encrypt_page.html")
