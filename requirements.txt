@@ -9,6 +9,7 @@ click==7.1.2
 colorama==0.4.3
 coverage==5.5
 cycler==0.10.0
+Cython==0.29.23
 datatype==0.8.5
 decorator==4.4.2
 distlib==0.3.1
@@ -62,6 +63,7 @@ tifffile==2021.4.8
 toml==0.10.2
 urllib3==1.26.2
 virtualenv==20.0.28
+waitress==2.0.0
 Werkzeug==1.0.1
 wrapt==1.11.2
 WTForms==2.3.1

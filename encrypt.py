@@ -129,7 +129,6 @@ def add_round_key_transform(img_mct,roundKey):
 
 
 def main_encrypt(number, file_name):
-    print('image data', f)
 # if __name__ == '__main__':
     # file_name = '2319856.jpg'
     img = get_image(file_name)

@@ -146,7 +146,7 @@ def main_decrypt(number, file_name):
     else:
         print('Invalid Input')
     
-    print(img)
+    
     img_iarkt=np.zeros((256,256),int)
     img_iarkt=inverse_add_round_key_transform(img,roundKey)
     
