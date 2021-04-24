@@ -5,7 +5,7 @@ import os
 
 def get_image(file_name):
     path = 'static/uploaded_images(decrypte)/'
-    img = cv.imread(os.path.join(path, file_name), cv.IMREAD_GRAYSCALE)
+    img = cv.imread(os.path.join(path, file_name))
     # print(img)
     # img = img.astype(np.uint8)
     # cv.imshow('lamp', img)
@@ -147,22 +147,31 @@ def main_decrypt(number, file_name):
         print('Invalid Input')
     
     
-    img_iarkt=np.zeros((256,256),int)
-    img_iarkt=inverse_add_round_key_transform(img,roundKey)
+    b, g, r    = img[:, :, 0], img[:, :, 1], img[:, :, 2]
+    x = []
+    x.append(b)
+    x.append(g)
+    x.append(r)
+
+    for i in range(3):
+        img_iarkt=np.zeros((256,256),int)
+        img_iarkt=inverse_add_round_key_transform(x[i],roundKey)
+        
+
+        img_imct=np.zeros((256,256),int)
+        img_imct=inv_mix_col_transform(img_iarkt)
+
+
+        img_isrt=np.zeros((256,256),int)
+        img_isrt=inv_shift_row_transform(img_imct)
+        
+
+        img_isbt=np.zeros((256,256),int)
+        img_isbt=inv_sub_byte_transform(img_isrt)
+        x[i] = img_isbt
     
-
-    img_imct=np.zeros((256,256),int)
-    img_imct=inv_mix_col_transform(img_iarkt)
-
-
-    img_isrt=np.zeros((256,256),int)
-    img_isrt=inv_shift_row_transform(img_imct)
-    
-
-    img_isbt=np.zeros((256,256),int)
-    img_isbt=inv_sub_byte_transform(img_isrt)
-
+    img = np.dstack((x[0],x[1],x[2]))
     
     path = 'static/decrypted_images/'
-    cv.imwrite(path + file_name, img_isbt)
+    cv.imwrite(path + file_name, img)
     return file_name

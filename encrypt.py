@@ -4,7 +4,7 @@ import os
 
 def get_image(file_name):
     path = 'static/uploaded_images(encrypte)/'
-    img = cv.imread(os.path.join(path, file_name), cv.IMREAD_GRAYSCALE)
+    img = cv.imread(os.path.join(path, file_name))
     # print(img)
     # img = img.astype(np.uint8)
     # cv.imshow('lamp', img)
@@ -130,7 +130,6 @@ def add_round_key_transform(img_mct,roundKey):
 
 def main_encrypt(number, file_name):
 # if __name__ == '__main__':
-    # file_name = '2319856.jpg'
     img = get_image(file_name)
     # cv.imshow('img', img)
     # cv.waitKey(0)
@@ -142,52 +141,38 @@ def main_encrypt(number, file_name):
         print('Invalid Input')
         
     # Substitute Byte Transformation
-    img_sbt=np.zeros((256,256),int)
-    img_sbt=sub_byte_transform(img)
-    # print(img_sbt)
-    # img_sbt = img_sbt.astype(np.uint8)
-    # cv.imshow('img_sbt', img_sbt)
-    # cv.waitKey(0)
+    b, g, r    = img[:, :, 0], img[:, :, 1], img[:, :, 2]
+    x = []
+    x.append(b)
+    x.append(g)
+    x.append(r)
+    for i in range(3):
+    # Substitute Byte Transformation
+        img_sbt=np.zeros((256,256),int)
+        img_sbt=sub_byte_transform(x[i])
+        
 
-    # Shift Rows Transformation
-    img_srt=np.zeros((256,256),int)
-    img_srt=shift_row_transform(img_sbt)
-    # print(img_srt)
-    # img_srt = img_srt.astype(np.uint8)
-    # cv.imshow('img_srt', img_srt)
-    # cv.waitKey(0)
+        # Shift Rows Transformation
+        img_srt=np.zeros((256,256),int)
+        img_srt=shift_row_transform(img_sbt)
 
-    # Mix Columns Transformation
-    img_mct=np.zeros((256,256),int)
-    img_mct=mix_col_transform(img_srt)
-    # print(img_mct)
-    # img_mct = img_mct.astype(np.uint8)
-    # cv.imshow('img_mct', img_mct)
-    # cv.waitKey(0)
+        # Mix Columns Transformation
+        img_mct=np.zeros((256,256),int)
+        img_mct=mix_col_transform(img_srt)
 
-    # Add Round Key Transformation
-    img_arkt=np.zeros((256,256),int)
-    img_arkt=add_round_key_transform(img_mct,roundKey)
+        # Add Round Key Transformation
+        img_arkt=np.zeros((256,256),int)
+        img_arkt=add_round_key_transform(img_mct,roundKey)
+        
+        x[i] = img_arkt
     
-    img_arkt = img_arkt.astype(np.uint8)
-    # cv.imshow('img_arkt', img_arkt)
-    # cv.waitKey(0)
-    # print(img_arkt)
-    # cv.imshow('img_arkt', img_arkt)
-    # cv.waitKey(0)
+    im = np.dstack((x[0],x[1],x[2]))
+    # print(im)
+    img = im.astype(np.uint8)
     
     path = 'static/encrypted_images/'
     file_name = file_name.split('.')
-    # print(file_name)
     f_name = file_name[0]+'.png'
     # print(f_name)
-    cv.imwrite(os.path.join(path + f_name), img_arkt)
+    cv.imwrite(os.path.join(path + f_name), img)
     return f_name
-
-    # img = cv.imread(path + file_name,0)
-
-    # print(img)
-    # data = im.fromarray(img_arkt)
-    # file_name = '2319856'
-    # data.save('static/encrypted_images/myphoto.png')
-    #cv.imwrite(path + file_name, img_arkt)
