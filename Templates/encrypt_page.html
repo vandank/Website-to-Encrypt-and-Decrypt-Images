@@ -7,8 +7,6 @@
     <title>Encrypt </title>
 
 
-    
-
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
@@ -33,7 +31,7 @@
     
     <main>
       
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark "style="background-color: #42A5F5;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,13 +67,13 @@
                     {% endif %}
                     {% endwith %}
                 </p>
-              <form action="/encrypt" method="POST" enctype="multipart/form-data">
-                <input class="btn btn-primary" name="file" role="button" type="file" >
-                <h4>Enter a 16 digit key for Encryption</h4>
-                <input type="text" name="key" placeholder="Enter Key" class="border border-primary">
-                <input type="submit" value="upload">
-              </form>
-              {% endif %}
+                <form action="/encrypt" method="POST" enctype="multipart/form-data">
+                  <input class="btn btn-primary" name="file" role="button" type="file" >
+                  <h4>Enter a 16 digit key for Encryption</h4>
+                  <input type="text" name="key" placeholder="Enter Key" class="border border-primary">
+                  <input type="submit" value="upload">
+                </form>
+                {% endif %}
               {% if flag == 1 %}
                 <a href="/static/encrypted_images/{{file_name}}" download> 
                   <button type="button"  class="btn btn-primary">Download</button>
@@ -88,39 +86,62 @@
       </div>
     </main>
 
-
-    <footer>
-      <!-- Social buttons -->
-      <ul class="list-unstyled list-inline text-center">
-          <li class="list-inline-item">
-              <a class="btn-floating btn-fb mx-1">
-                  <i class="fa fa-facebook"> </i>
+    <footer class="footer " style="text-align:center; justify-content: center;">
+      <div class="container d-flex" style="justify-content: center;">
+          <section class="mb-4 offset-md-2">
+              <i style="font-weight: bold;">Follow us on:  </i>
+              <!-- Facebook -->
+              <a class="btn btn-outline-light btn-floating" href="#!" role="button">
+                  <img src="https://i.pinimg.com/736x/ac/57/3b/ac573b439cde3dec8ca1c6739ae7f628.jpg" style="width:30px; height:30px;">
               </a>
-          </li>
-          <li class="list-inline-item">
-              <a class="btn-floating btn-tw mx-1">
-                  <i class="fa fa-instagram"> </i>
+          
+              <!-- Twitter -->
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                  <img src="https://i.insider.com/50db38a069bedd0d1000000c?width=600&format=jpeg&auto=webp" style="width:30px; height:30px;">
               </a>
-          </li>
-          <li class="list-inline-item">
-              <a class="btn-floating btn-gplus mx-1">
-                  <i class="fa fa-google"> </i>
+          
+              <!-- Instagram -->
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                  <img src="https://www.kings.edu/sites/default/files/Instagram%20Logo_2.jpg" style="width:30px; height:30px;">
               </a>
-          </li>
-
-      </ul>
-      <!-- Social buttons -->
-
+          
+              <!-- Linkedin -->
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                  <img src="https://i0.wp.com/img2.pngdownload.id/20180403/klw/kisspng-linkedin-logo-social-media-business-professional-n-style-5ac33a87e27554.0089620115227439439276.jpg" style="width:30px; height:30px;">
+              </a>
+          </section>
+          <div class="row " style="justify-content: right;">
+              <div class="row-md-auto align-middle-middle">
+                  checkout the source code
+              </div>
+              <div class="row col">
+                  <a href="https://github.com/dhairyakataria/Website-to-Encrypt-and-Decrypt-Images">
+                  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width:60px; height:60px;">
+                  </a>    
+              </div>
+          </div>
+      </div>
+      
       <!-- Copyright -->
       <div class="footer-copyright text-center py-3">
-          © 2010 Copyright:
-          <a href="#"> Mini-project.com</a>
+        © 2021 Copyright:
+        <a href="#"> Mini-project.com</a>
       </div>
-      <!-- Copyright -->
-    </footer>
-      <!-- Optional JavaScript; choose one of the two! -->
 
-      <!-- Option 1: Bootstrap Bundle with Popper -->
+  </footer>
+
+
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #E0E0E0;
+        text-align: center;
+    }
+    </style>
+    
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
       <!-- Option 2: Separate Popper and Bootstrap JS -->

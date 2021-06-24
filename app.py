@@ -6,7 +6,6 @@ from encrypt import main_encrypt
 from decrypt import main_decrypt
 
 
-
 app = Flask(__name__, template_folder='./Templates/')
 
 @app.route("/")
@@ -18,11 +17,13 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 @app.route("/encrypt", methods=['GET', 'POST'])
 def encrypt_img():
     UPLOAD_FOLDER = 'static/uploaded_images(encrypte)/'
     if request.method == 'POST':
         flag = 0
+
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -38,6 +39,7 @@ def encrypt_img():
         elif len(key)!=16:
             flash('Key should be of 16 digit')
 
+
         if file and allowed_file(file.filename) and len(key)==16:
             filename = secure_filename(file.filename)
             filename.replace(' ', '_')
@@ -49,15 +51,6 @@ def encrypt_img():
             return render_template("encrypt_page.html", flag = flag, file_name = filename)
 
     return render_template("encrypt_page.html")
-    # if request.method == 'POST':
-    #     print("in if")
-    #     ip_img = request.files['ip_image']
-    #     key = request.form['key']
-    #     ip_img.save(ip_img.filename)
-    #     return render_template("encrypt_page.html")
-    # print('not in if')
-    # return render_template("encrypt_page.html")
-
 
 
 @app.route("/decrypt", methods=['GET', 'POST'])
@@ -65,6 +58,7 @@ def decrypt_img():
     UPLOAD_FOLDER = 'static/uploaded_images(decrypte)/'
     if request.method == 'POST':
         flag = 0
+        
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
