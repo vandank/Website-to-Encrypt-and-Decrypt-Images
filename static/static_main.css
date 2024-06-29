@@ -1,0 +1,22 @@
+.dec_img{
+    cursor: pointer;
+    background-image: url("decrypt.jpg"); 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size:cover; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0.8
+}
+
+
+.enc_img{
+    cursor: pointer;
+    background-image: url("encrypt.jpg"); 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size:cover; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0.8
+};

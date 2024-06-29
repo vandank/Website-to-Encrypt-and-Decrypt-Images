@@ -136,8 +136,10 @@ def inv_sub_byte_transform(img_isrt):
 def main_decrypt(number, file_name):
 # if __name__ == '__main__':
     img = get_image(file_name)
-    # cv.imshow('img', img)
+    # img = img.astype(np.uint8)
+    # cv.imshow('uploaded image', img)
     # cv.waitKey(0)
+
 
     # number = '1236549879876543'
     #number = input('Enter a 16 digit key')
@@ -156,22 +158,35 @@ def main_decrypt(number, file_name):
     for i in range(3):
         img_iarkt=np.zeros((256,256),int)
         img_iarkt=inverse_add_round_key_transform(x[i],roundKey)
-        
+        # img_iarkt = img_iarkt.astype(np.uint8)
+        # cv.imshow('after adding roundkey image', img_iarkt)
+        # cv.waitKey(0)
 
         img_imct=np.zeros((256,256),int)
         img_imct=inv_mix_col_transform(img_iarkt)
-
+        # img_imct = img_imct.astype(np.uint8)
+        # cv.imshow('Mix Columns Transformed image', img_imct)
+        # cv.waitKey(0)
 
         img_isrt=np.zeros((256,256),int)
         img_isrt=inv_shift_row_transform(img_imct)
-        
+        # img_isrt = img_isrt.astype(np.uint8)
+        # cv.imshow('Shift Rows Transformed image', img_isrt)
+        # cv.waitKey(0)
 
         img_isbt=np.zeros((256,256),int)
         img_isbt=inv_sub_byte_transform(img_isrt)
+        # img_isbt = img_isbt.astype(np.uint8)
+        # cv.imshow('Substitute Byte Transformed image', img_isbt)
+        # cv.waitKey(0)
+
         x[i] = img_isbt
     
     img = np.dstack((x[0],x[1],x[2]))
-    
+    img = img.astype(np.uint8)
+    # cv.imshow('Decrypted Image', img)
+    # cv.waitKey(0)
+
     path = 'static/decrypted_images/'
     cv.imwrite(path + file_name, img)
     return file_name

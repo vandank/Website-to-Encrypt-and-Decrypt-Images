@@ -6,10 +6,6 @@ def get_image(file_name):
     path = 'static/uploaded_images(encrypte)/'
     img = cv.imread(os.path.join(path, file_name))
     # print(img)
-    # img = img.astype(np.uint8)
-    # cv.imshow('lamp', img)
-    # cv.waitKey(0)
-
     img=cv.resize(img,(256,256))
     return img
 
@@ -131,8 +127,10 @@ def add_round_key_transform(img_mct,roundKey):
 def main_encrypt(number, file_name):
 # if __name__ == '__main__':
     img = get_image(file_name)
-    # cv.imshow('img', img)
+    # img = img.astype(np.uint8)
+    # cv.imshow('uploaded image', img)
     # cv.waitKey(0)
+    
     # number = '1234567891234567'
     #number = input('Enter a 16 digit key')
     if len(number) == 16:
@@ -150,25 +148,37 @@ def main_encrypt(number, file_name):
     # Substitute Byte Transformation
         img_sbt=np.zeros((256,256),int)
         img_sbt=sub_byte_transform(x[i])
-        
+        # img_sbt = img_sbt.astype(np.uint8)
+        # cv.imshow('Substitute Byte Transformed image', img_sbt)
+        # cv.waitKey(0)
 
         # Shift Rows Transformation
         img_srt=np.zeros((256,256),int)
         img_srt=shift_row_transform(img_sbt)
+        # img_srt = img_srt.astype(np.uint8)
+        # cv.imshow('Shift Rows Transformed image', img_srt)
+        # cv.waitKey(0)
 
         # Mix Columns Transformation
         img_mct=np.zeros((256,256),int)
         img_mct=mix_col_transform(img_srt)
+        # img_mct = img_mct.astype(np.uint8)
+        # cv.imshow('Mix Columns Transformed image', img_mct)
+        # cv.waitKey(0)
 
         # Add Round Key Transformation
         img_arkt=np.zeros((256,256),int)
         img_arkt=add_round_key_transform(img_mct,roundKey)
+        # img_arkt = img_arkt.astype(np.uint8)
+        # cv.imshow('after adding roundkey image', img_arkt)
+        # cv.waitKey(0)
         
         x[i] = img_arkt
     
     im = np.dstack((x[0],x[1],x[2]))
-    # print(im)
     img = im.astype(np.uint8)
+    # cv.imshow('Decrypted Image', img)
+    # cv.waitKey(0)
     
     path = 'static/encrypted_images/'
     file_name = file_name.split('.')
